@@ -1,23 +1,19 @@
-<?php
-
-require_once 'vendor/autoload.php';
-
-use Tustin\PlayStation\Client;
-
-$client = new Client();
-
-$client->loginWithNpsso('Z05VaSabBl8a1SPVNUeoK4XAqKYTp0TNr65LVti27DX8sNzOvMTU0wZlnPx698CG');
-
-$refreshToken = $client->getRefreshToken()->getToken();
-
-$user = $client->users()->me();
-
-
-$titles = $user->trophyTitles();
-
-
-foreach ($titles as $title) {
-    echo $title->name() . "<br><br>";
-}
-
-?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlayStation Trophies</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <main>
+        <div class="container mt-4 d-flex flex-row">
+            <form action="" method="POST">
+                <input type="text" class="form-control" id="user-search" placeholder="Search user...">
+                <button type="submit" class="btn btn-primary">OK</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
