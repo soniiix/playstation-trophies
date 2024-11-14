@@ -45,7 +45,7 @@ abstract class AbstractApiIterator extends Api implements Iterator, Countable
      *
      * @var array
      */
-    protected $cache = [];
+    public $cache = [];
 
     /**
      * Access a specific cursor in the API.

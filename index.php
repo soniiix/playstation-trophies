@@ -9,9 +9,9 @@
 <body>
     <main>
         <div class="container mt-4 d-flex flex-row">
-            <form action="" method="POST">
-                <input type="text" class="form-control" id="user-search" placeholder="Search user...">
-                <button type="submit" class="btn btn-primary">OK</button>
+            <form action="games.php" method="POST">
+                <input type="text" class="form-control" name="input-search" placeholder="Search user...">
+                <button type="submit" class="btn btn-primary" name="btn-search">OK</button>
             </form>
         </div>
     </main>
