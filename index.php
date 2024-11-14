@@ -1,3 +1,15 @@
+<?php
+    require_once('functions.php');
+
+    if(isset($_POST['btn-search'], $_POST['input-search'])){
+        $user_search = $_POST['input-search'];
+        $account_id = getAccountIdByUsername($user_search);
+        $user = getUserByAccountId($account_id);
+
+        $summary = $user->trophySummary();        
+    }
+    
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,13 +19,57 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <main>
-        <div class="container mt-4 d-flex flex-row">
-            <form action="games.php" method="POST">
+    <div class="container-sm text-center">
+        <form action="index.php" method="POST" class="mb-4 mt-4">
+            <div class="input-group">
                 <input type="text" class="form-control" name="input-search" placeholder="Search user...">
-                <button type="submit" class="btn btn-primary" name="btn-search">OK</button>
-            </form>
-        </div>
-    </main>
+                <button type="submit" class="btn btn-primary" name="btn-search">Search</button>
+            </div>
+        </form>
+        <main>
+            <?php if(isset($user)){ ?>
+            <div class="card shadow">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="<?php echo $user->avatarUrl() ?>" class="img-fluid rounded-start" alt="User's avatar">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo $user->onlineId(); ?></h5>
+                            <p class="card-text">
+                                Level : <?php echo $summary->level(); ?>
+                                <br><br>
+                                Trophy Summary :
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        Platinum : <?php echo $summary->platinum(); ?>
+                                    </li>
+                                    <li class="list-group-item">
+                                        Gold : <?php echo $summary->gold(); ?>
+                                    </li>
+                                    <li class="list-group-item">
+                                        Silver : <?php echo $summary->silver(); ?>
+                                    </li>
+                                    <li class="list-group-item">
+                                        Bronze : <?php echo $summary->bronze(); ?>
+                                    </li>
+                                </ul>
+                            </p>
+                            <p class="card-text">
+                                <small class="text-body-secondary">
+                                    <?php
+                                        $status = $user->isOnline() ? 'Online' : 'Offline';
+                                        echo $status;
+                                    ?>
+                                </small>
+                            </p>
+                            <a href="games.php?user=" class="btn btn-primary">View games</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php } ?>
+        </main>
+    </div>
 </body>
 </html>

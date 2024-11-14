@@ -23,9 +23,11 @@ function getAccountIdByUsername($username){
     }
 }
 
-echo(getAccountIdByUsername('tustin255444'));
-
-
+function getUserByAccountId($account_id){
+    $client = getPlayStationClient();
+    $user = $client->users()->find($account_id);
+    return $user;
+}
 
 
 
