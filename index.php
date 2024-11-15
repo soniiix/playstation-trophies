@@ -5,12 +5,17 @@
 
     if(isset($_POST['btn-search'], $_POST['input-search'])){
         $user_search = $_POST['input-search'];
-        $account_id = getAccountIdByUsername($user_search);
-        $user = getUserByAccountId($account_id);
 
-        $_SESSION['accountId'] = $user->accountId();
+        $user = getUserByOnlineId($user_search);
 
-        $summary = $user->trophySummary();        
+        if ($user != ""){
+            $_SESSION['accountId'] = $user->accountId();
+            $summary = $user->trophySummary();
+        }
+        else{
+            $not_find = true;
+        }
+      
     }
     
 ?>
@@ -31,8 +36,16 @@
             </div>
         </form>
         <main>
-            <?php if(isset($user)){ ?>
-            <div class="card shadow">
+            <?php 
+            if(isset($not_find)){
+                ?>
+                <div class="card shadow">
+                    <h5 class="my-4">Aucun utilisateur trouvé...</h5>
+                </div>
+                <?php
+            }
+            if(isset($user)){ ?>
+            <div class="card shadow mb-4">
                 <div class="row g-0">
                     <div class="col-md-4">
                         <img src="<?php echo $user->avatarUrl() ?>" class="img-fluid rounded-start" alt="User's avatar">
