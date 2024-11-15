@@ -1,10 +1,14 @@
 <?php
     require_once('functions.php');
 
+    session_start();
+
     if(isset($_POST['btn-search'], $_POST['input-search'])){
         $user_search = $_POST['input-search'];
         $account_id = getAccountIdByUsername($user_search);
         $user = getUserByAccountId($account_id);
+
+        $_SESSION['accountId'] = $user->accountId();
 
         $summary = $user->trophySummary();        
     }
@@ -63,7 +67,7 @@
                                     ?>
                                 </small>
                             </p>
-                            <a href="games.php?user=" class="btn btn-primary">View games</a>
+                            <a href="games.php" class="btn btn-primary">View games</a>
                         </div>
                     </div>
                 </div>
