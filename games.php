@@ -46,28 +46,5 @@
         </div>
     <?php } ?>
 
-
-
-
-
-    <ul class="list-group">
-        <?php
-        foreach($games as $game){
-            ?>
-            <li class="list-group-item">
-                <div style="width: 320px;">
-                    <img src="<?php echo $game->iconUrl() ?>">
-                </div>
-                <?php echo $game->name() . '<br>'; ?>
-                <div class="progress" role="progressbar">
-                    <div class="progress-bar" style="width: <?php echo $game->progress() ?>%">
-                        <?php echo $game->progress() . '%' ?>
-                    </div>
-                </div>
-            </li>
-        <?php
-        }
-        ?>
-    </ul>
 </body>
 </html>
