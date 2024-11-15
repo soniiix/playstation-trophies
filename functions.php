@@ -9,18 +9,16 @@ function getPlayStationClient(){
     return $client;
 }
 
-function getAccountIdByUsername($username){
+function getUserByOnlineId($username){
     $client = getPlayStationClient();
     $query = $client->users()->search($username);
-    $users = $query->cache;
-    foreach($users as $user){
-        if($user->socialMetadata->onlineId == $username){
-            return $user->socialMetadata->accountId;
-        }
-        else{
-            return "";
-        }
+    try{
+        $user = $query->current();
     }
+    catch(Exception $e){
+        return "";
+    }
+    return $user;
 }
 
 function getUserByAccountId($account_id){
@@ -28,7 +26,5 @@ function getUserByAccountId($account_id){
     $user = $client->users()->find($account_id);
     return $user;
 }
-
-
 
 ?>
