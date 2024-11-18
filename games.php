@@ -24,27 +24,42 @@
 <body>
 
     <?php
+    //check if user has games
+    $haveGames = false;
     foreach($games as $game){
-        ?>
-        <div class="row">
-            <div class="col-4" style="height: 250px;">
-                <img src="<?php echo $game->iconUrl() ?>" style="width: 250px; height: 250px ;">
-            </div>
+        if ($game->name() !== null){
+            $haveGames = true;
+            break;
+        };
+    }
+    //case when the user has no games
+    if(!$haveGames){
+        echo "No trophies yet.";
+    }
+    else{
+        foreach($games as $game){
 
-            <div class="col-8">
-                <h5><?php echo $game->name(); ?></h5>
-            <div style="height: 50%; padding: 10px;">
-            </div>
-            <div style="height: 50%; padding: 10px;">
-                <div class="progress" role="progressbar">
-                    <div class="progress-bar" style="width: <?php echo $game->progress() ?>%">
-                        <?php echo $game->progress() . '%' ?>
+            ?>
+            <div class="row">
+                <div class="col-4" style="height: 250px;">
+                    <img src="<?php echo $game->iconUrl() ?>" style="width: 250px; height: 250px ;">
+                </div>
+    
+                <div class="col-8">
+                    <h5><?php echo $game->name(); ?></h5>
+                <div style="height: 50%; padding: 10px;">
+                </div>
+                <div style="height: 50%; padding: 10px;">
+                    <div class="progress" role="progressbar">
+                        <div class="progress-bar" style="width: <?php echo $game->progress() ?>%">
+                            <?php echo $game->progress() . '%' ?>
+                        </div>
                     </div>
                 </div>
+                </div>
             </div>
-            </div>
-        </div>
-    <?php } ?>
-
+        <?php }
+    } ?>
+    
 </body>
 </html>
