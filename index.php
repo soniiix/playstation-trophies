@@ -6,16 +6,18 @@
     if(isset($_POST['btn-search'], $_POST['input-search'])){
         $user_search = $_POST['input-search'];
 
-        $user = getUserByOnlineId($user_search);
+        if($user_search != ""){
 
-        if ($user != ""){
-            $_SESSION['accountId'] = $user->accountId();
-            $summary = $user->trophySummary();
-        }
-        else{
-            $not_find = true;
-        }
-      
+            $user = getUserByOnlineId($user_search);
+
+            if ($user != ""){
+                $_SESSION['accountId'] = $user->accountId();
+                $summary = $user->trophySummary();
+            }
+            else{
+                $not_find = true;
+            }
+        }     
     }
     
 ?>
@@ -31,7 +33,7 @@
     <div class="container-sm text-center">
         <form action="index.php" method="POST" class="mb-4 mt-4">
             <div class="input-group">
-                <input type="text" class="form-control" name="input-search" placeholder="Search user...">
+                <input type="text" class="form-control" name="input-search" placeholder="Search user..." required>
                 <button type="submit" class="btn btn-primary" name="btn-search">Search</button>
             </div>
         </form>
